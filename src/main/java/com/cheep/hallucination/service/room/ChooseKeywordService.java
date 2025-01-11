@@ -13,12 +13,14 @@ import com.cheep.hallucination.repository.UserRepository;
 import com.cheep.hallucination.usecase.room.ChooseKeywordUsecase;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class ChooseKeywordService implements ChooseKeywordUsecase {
     private final UserRepository userRepository;
     private final RoomRepository roomRepository;
@@ -33,6 +35,9 @@ public class ChooseKeywordService implements ChooseKeywordUsecase {
 
         Keyword keyword = keywordRepository.findById(room.getKeyword().getId())
                 .orElseThrow(() -> new CommonException(ErrorCode.NOT_FOUND_KEYWORD));
+
+        log.info("keyword1: {} ", chooseKeywordRequestDto.keyword() );
+        log.info("keyword2: {} ", keyword.getName() );
 
         if(keyword.getName().equals(chooseKeywordRequestDto.keyword())) {
             return ChooseKeywordResponseDto.builder()
