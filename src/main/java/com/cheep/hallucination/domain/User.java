@@ -92,4 +92,7 @@ public class User {
     public void updateChancePlay() {
         this.chancePlay = 0;
     }
+    public void updateChance() {
+        this.chancePlay = 1;
+    }
 }
