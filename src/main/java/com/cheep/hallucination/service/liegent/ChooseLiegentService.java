@@ -34,7 +34,7 @@ public class ChooseLiegentService implements ChooseLiegentUsecase {
         // 고른 캐릭터가 라이전트가 맞다면
         if (liarCharacterId.equals(chooseCharacterId)) {
             // 라이전트 검거 여부를 True로 변경
-            boolean isSuccess = room.updateSuccess();
+            boolean isSuccess = true;
             // 라이전트 검거 여부와 플레이어의 다음 라운드를 반환
             return ChooseLiegentResponseDto.builder()
                     .isSuccess(isSuccess)
