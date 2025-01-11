@@ -5,7 +5,7 @@ on:
       - main
 
 jobs:
-  Docker_Build:
+  Docker_Build_And_Push:
     runs-on: ubuntu-22.04
 
     steps:
@@ -13,7 +13,7 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v3
 
-      - name: Set YMAL file
+      - name: Set YAML file
         run: |
           mkdir -p ./src/main/resources
           echo "${{ secrets.APPLICATION_PROD_YML }}" | base64 --decode > ./src/main/resources/application-prod.yml
@@ -28,23 +28,13 @@ jobs:
       - name: List files in current directory
         run: ls -la
 
-      # 4. Docker 이미지 빌드 및 테스트 실행 후 push
-      - name: Build Docker image for testing
+      # 4. Docker 이미지 빌드 및 푸시
+      - name: Build and Push Docker image
         run: |
-          docker buildx build --platform linux/amd64 --load --tag 5hseok/hallucination-server:0.0.1 -f ./Dockerfile .
-
-  Push_Image:
-    needs: Docker_Build
-    runs-on: ubuntu-22.04
-
-    steps:
-      # Docker Hub로 이미지 push
-      - name: Push Docker image to Docker Hub
-        run: |
-          docker push 5hseok/hallucination-server:0.0.1
+          docker buildx build --platform linux/amd64 --push --tag 5hseok/hallucination-server:0.0.1 -f ./Dockerfile .
 
   Deploy:
-    needs: Push_Image
+    needs: Docker_Build_And_Push
     runs-on: ubuntu-22.04
 
     steps:
