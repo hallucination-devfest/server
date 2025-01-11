@@ -34,7 +34,7 @@ public class RoomController {
         return ResponseDto.ok(chooseLiegentUsecase.execute(roomId, lierId));
     }
 
-    @PostMapping("/{roomId}/}keyword")
+    @PostMapping("/{roomId}/keyword")
     public ResponseDto<?> createRoomKeyword (
             @Valid @RequestBody ChooseKeywordRequestDto chooseKeywordRequestDto,
             @PathVariable Long roomId,
