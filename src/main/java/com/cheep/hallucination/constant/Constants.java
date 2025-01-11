@@ -13,6 +13,7 @@ public class Constants {
             "/auth/reissue",
             "/oauth/login/kakao",
             "/oauth/login/kakao/callback",
+            "/oauth/social/kakao",
 
             "/api-docs.html",
             "/api-docs/**",
