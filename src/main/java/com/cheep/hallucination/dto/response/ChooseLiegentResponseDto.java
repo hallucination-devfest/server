@@ -4,7 +4,6 @@ import lombok.Builder;
 
 @Builder
 public record ChooseLiegentResponseDto (
-        Boolean isSuccess,
-        int nextRound
+        Boolean isSuccess
 ) {
 }

@@ -34,14 +34,12 @@ public class ChooseLiegentService implements ChooseLiegentUsecase {
             // 라이전트 검거 여부와 플레이어의 다음 라운드를 반환
             return ChooseLiegentResponseDto.builder()
                     .isSuccess(isSuccess)
-                    .nextRound(room.getRound() + 1)
                     .build();
         }
         else{
             // 라이전트 검거 여부가 False이고, 플레이어의 다음 라운드는 처음부터 다시 시작이므로 1을 반환
             return ChooseLiegentResponseDto.builder()
                     .isSuccess(false)
-                    .nextRound(1)
                     .build();
         }
     }
