@@ -30,8 +30,8 @@ public class RoomController {
     }
 
     @GetMapping("/{roomId}/lier/{lierId}")
-    public ResponseDto<?> getRoom (@PathVariable Long roomId, @PathVariable Long lierId) {
-        return ResponseDto.ok(chooseLiegentUsecase.execute(roomId, lierId));
+    public ResponseDto<?> getRoom (@PathVariable Long roomId, @PathVariable Long lierId, @UserId UUID userId) {
+        return ResponseDto.ok(chooseLiegentUsecase.execute(roomId, lierId, userId));
     }
 
     @PostMapping("/{roomId}/keyword")
