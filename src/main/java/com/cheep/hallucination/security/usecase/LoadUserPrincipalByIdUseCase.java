@@ -7,5 +7,5 @@ import org.springframework.security.core.userdetails.UserDetails;
 @UseCase
 public interface LoadUserPrincipalByIdUseCase {
 
-    UserDetails execute(UUID userId);
+    UserDetails execute(UUID userId, String redirectURI);
 }

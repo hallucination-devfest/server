@@ -31,7 +31,7 @@ public class UserController {
     public ResponseDto<?> updatePlayChance(
             @UserId UUID userId
     ) {
-        return ResponseDto.ok(readUsernameUsecase.execute(userId));
+        return ResponseDto.ok(updatePlayChanceUsecase.execute(userId));
     }
 
 

@@ -23,11 +23,11 @@ public class CustomUserDetailServiceById implements UserDetailsService, LoadUser
     }
 
     @Override
-    public UserDetails execute(UUID userId) {
+    public UserDetails execute(UUID userId, String redirectURI) {
         UserRepository.UserSecurityForm userSecurityForm = userRepository.findFormById(userId)
                 .orElseThrow(() -> new CommonException(ErrorCode.NOT_FOUND_USER));
 
-        if(userSecurityForm.getChancePlay() == 0)
+        if(userSecurityForm.getChancePlay() == 0 && !redirectURI.equals("/users"))
             throw new CommonException(ErrorCode.LAKE_OF_CHANCE);
 
         return UserPrincipal.create(userSecurityForm);
