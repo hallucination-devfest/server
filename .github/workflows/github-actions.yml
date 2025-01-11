@@ -34,6 +34,7 @@ jobs:
           docker buildx build --platform linux/amd64 --load --tag 5hseok/hallucination-server:0.0.1 -f ./Dockerfile .
 
   Push_Image:
+    needs: Docker_Build
     runs-on: ubuntu-22.04
 
     steps:
@@ -43,6 +44,7 @@ jobs:
           docker push 5hseok/hallucination-server:0.0.1
 
   Deploy:
+    needs: Push_Image
     runs-on: ubuntu-22.04
 
     steps:
