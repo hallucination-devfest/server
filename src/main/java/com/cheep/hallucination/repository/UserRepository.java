@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
 
-    @Query("select u.id as id, u.role as role, u.password as password from User u where u.id = :id and u.refreshToken is not null")
+    @Query("select u.id as id, u.role as role, u.password as password, u.chancePlay as chancePlay from User u where u.id = :id and u.refreshToken is not null")
     Optional<UserSecurityForm> findFormById(@Param("id") UUID id);
 
     @Query("select u.id as id, u.role as role, u.password as password from User u where u.id = :id and u.refreshToken = :refreshToken")
@@ -35,6 +35,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
         UUID getId();
         ERole getRole();
         String getPassword();
+        Integer getChancePlay();
 
         // User To UserSecurityForm
         static UserSecurityForm of(User user) {
@@ -53,6 +54,9 @@ public interface UserRepository extends JpaRepository<User, UUID> {
                 public String getPassword() {
                     return user.getPassword();
                 }
+
+                @Override
+                public Integer getChancePlay() {return user.getChancePlay();}
             };
         }
     }

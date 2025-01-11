@@ -27,6 +27,9 @@ public class CustomUserDetailServiceById implements UserDetailsService, LoadUser
         UserRepository.UserSecurityForm userSecurityForm = userRepository.findFormById(userId)
                 .orElseThrow(() -> new CommonException(ErrorCode.NOT_FOUND_USER));
 
+        if(userSecurityForm.getChancePlay() == 0)
+            throw new CommonException(ErrorCode.LAKE_OF_CHANCE);
+
         return UserPrincipal.create(userSecurityForm);
     }
 }

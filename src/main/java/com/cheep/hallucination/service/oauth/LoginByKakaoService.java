@@ -4,6 +4,9 @@ import com.cheep.hallucination.domain.User;
 import com.cheep.hallucination.domain.type.EProvider;
 import com.cheep.hallucination.domain.type.ERole;
 import com.cheep.hallucination.dto.response.JwtTokenDto;
+import com.cheep.hallucination.dto.response.LoginResponseDto;
+import com.cheep.hallucination.exception.CommonException;
+import com.cheep.hallucination.exception.ErrorCode;
 import com.cheep.hallucination.repository.UserRepository;
 import com.cheep.hallucination.usecase.oauth.LoginByKakaoUseCase;
 import com.cheep.hallucination.util.JwtUtil;
@@ -28,7 +31,7 @@ public class LoginByKakaoService implements LoginByKakaoUseCase {
 
     @Override
     @Transactional
-    public JwtTokenDto execute(String accessToken) {
+    public LoginResponseDto execute(String accessToken) {
         Map<String, String> userInfo = oAuth2Util.getKakaoUserInformation(accessToken);
 
         String serialId = userInfo.get("id");
@@ -50,10 +53,15 @@ public class LoginByKakaoService implements LoginByKakaoUseCase {
                 userSecurityForm.getId(),
                 userSecurityForm.getRole()
         );
+        User user = userRepository.findById(userSecurityForm.getId())
+                        .orElseThrow(() -> new CommonException(ErrorCode.NOT_FOUND_USER));
 
         userRepository.updateRefreshToken(userSecurityForm.getId(), jwtTokenDto.refreshToken());
 
-        return jwtTokenDto;
+        return LoginResponseDto.builder()
+                .jwtTokenDto(jwtTokenDto)
+                .username(user.getNickname())
+                .build();
     }
 
 }

@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -27,6 +28,12 @@ public class Room {
 
     @Column(name = "is_success")
     private Boolean isSuccess;
+
+    @Column(name = "round")
+    private Integer round;
+
+    @Column(name = "createdAt")
+    private LocalDateTime createdAt;
 
     //-------------------------------
 
