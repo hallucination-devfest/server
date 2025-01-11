@@ -40,6 +40,7 @@ public class ChooseKeywordService implements ChooseKeywordUsecase {
         log.info("keyword2: {} ", keyword.getName() );
 
         if(keyword.getName().equals(chooseKeywordRequestDto.keyword())) {
+            room.updateSuccess();
             return ChooseKeywordResponseDto.builder()
                     .isSuccess(true)
                     .build();
