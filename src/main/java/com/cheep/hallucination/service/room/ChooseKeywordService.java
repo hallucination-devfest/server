@@ -31,7 +31,7 @@ public class ChooseKeywordService implements ChooseKeywordUsecase {
         Room room = roomRepository.findById(roomId)
                 .orElseThrow(() -> new CommonException(ErrorCode.NOT_FOUND_ROOM));
 
-        Keyword keyword = keywordRepository.findById(room.getId())
+        Keyword keyword = keywordRepository.findById(room.getKeyword().getId())
                 .orElseThrow(() -> new CommonException(ErrorCode.NOT_FOUND_KEYWORD));
 
         if(keyword.getName().equals(chooseKeywordRequestDto.keyword())) {
