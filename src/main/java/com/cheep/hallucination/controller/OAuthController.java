@@ -2,8 +2,10 @@ package com.cheep.hallucination.controller;
 
 import com.cheep.hallucination.constant.Constants;
 import com.cheep.hallucination.dto.common.ResponseDto;
+import com.cheep.hallucination.dto.response.LoginResponseDto;
 import com.cheep.hallucination.exception.CommonException;
 import com.cheep.hallucination.exception.ErrorCode;
+import com.cheep.hallucination.service.oauth.LoginKakaoService;
 import com.cheep.hallucination.usecase.oauth.GetTokenByKakaoUseCase;
 import com.cheep.hallucination.usecase.oauth.LoginByKakaoUseCase;
 import com.cheep.hallucination.usecase.oauth.RedirectToKakaoLoginUseCase;
@@ -25,6 +27,7 @@ public class OAuthController {
     private final LoginByKakaoUseCase loginByKakaoUseCase;
     private final RedirectToKakaoLoginUseCase redirectToKakaoLoginUseCase;
     private final GetTokenByKakaoUseCase getTokenByKakaoUseCase;
+    private final LoginKakaoService loginKakaoService;
 
     @PostMapping("/login/kakao")
     public ResponseDto<?> loginByKakao(
@@ -34,6 +37,12 @@ public class OAuthController {
                 .orElseThrow(() -> new CommonException(ErrorCode.NOT_FOUND_AUTHORIZATION_HEADER));
 
         return ResponseDto.ok(loginByKakaoUseCase.execute(accessToken));
+    }
+
+    @PostMapping("/social/kakao")
+    public ResponseDto<LoginResponseDto> byKakao(
+            @RequestParam("code") String code) {
+        return ResponseDto.ok(loginKakaoService.socialSignIn(code));
     }
 
     @GetMapping("/login/kakao")
