@@ -54,12 +54,6 @@ public class Room {
     @ManyToOne(fetch = FetchType.LAZY)
     private Character liarCharacter;
 
-    @OneToMany(mappedBy = "room", cascade = CascadeType.MERGE)
-    private List<RoomChat> roomChats;
-
-    @OneToMany(mappedBy = "room", cascade = CascadeType.MERGE)
-    private List<RoomInterview> roomInterviews;
-
     //-----------------------------------------------
 
     @Builder
