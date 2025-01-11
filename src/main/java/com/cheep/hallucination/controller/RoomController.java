@@ -4,6 +4,7 @@ import com.cheep.hallucination.annotation.UserId;
 import com.cheep.hallucination.dto.common.ResponseDto;
 import com.cheep.hallucination.dto.request.ChooseKeywordRequestDto;
 import com.cheep.hallucination.dto.response.CreateRoomResponseDto;
+import com.cheep.hallucination.usecase.chat.InterviewChatHistoryUsecase;
 import com.cheep.hallucination.usecase.liegent.ChooseLiegentUsecase;
 import com.cheep.hallucination.usecase.room.ChooseKeywordUsecase;
 import com.cheep.hallucination.usecase.room.CreateRoomUsecase;
@@ -21,6 +22,7 @@ public class RoomController {
     private final CreateRoomUsecase createRoomUsecase;
     private final ChooseLiegentUsecase chooseLiegentUsecase;
     private final ChooseKeywordUsecase chooseKeywordUsecase;
+    private final InterviewChatHistoryUsecase interviewChatHistoryUsecase;
 
     @PostMapping("")
     public ResponseDto<?> createRoom (
@@ -41,5 +43,10 @@ public class RoomController {
             @UserId UUID userId
     ) {
         return ResponseDto.ok(chooseKeywordUsecase.execute(chooseKeywordRequestDto, roomId, userId));
+    }
+
+    @GetMapping("/{roomId}/interview/{characterId}")
+    public ResponseDto<?> getInterviewHistory (@PathVariable Long roomId, @PathVariable Long characterId) {
+        return ResponseDto.ok(interviewChatHistoryUsecase.execute(roomId, characterId));
     }
 }
