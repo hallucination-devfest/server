@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -45,9 +46,25 @@ public class Room {
     @ManyToOne(fetch = FetchType.LAZY)
     private Keyword keyword;
 
+    @JoinColumn(name = "liar_character_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Character liarCharacter;
+
     @OneToMany(mappedBy = "room", cascade = CascadeType.MERGE)
     private List<RoomChat> roomChats;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.MERGE)
     private List<RoomInterview> roomInterviews;
+
+    //-----------------------------------------------
+
+    @Builder
+    public Room(Integer round, User user, Keyword keyword, Character liarCharacter) {
+        this.isSuccess = false;
+        this.round = round;
+        this.createdAt = LocalDateTime.now();
+        this.user = user;
+        this.keyword = keyword;
+        this.liarCharacter = liarCharacter;
+    }
 }

@@ -29,9 +29,6 @@ public class RoomChat {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "is_lier")
-    private Boolean isLier;
-
     //----------------------------------
 
     @JoinColumn(name = "room_id")
