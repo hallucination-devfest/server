@@ -63,13 +63,14 @@ public class Room {
     //-----------------------------------------------
 
     @Builder
-    public Room(Integer round, User user, Keyword keyword, Character liarCharacter) {
+    public Room(Integer round, User user, Keyword keyword, Character liarCharacter, Integer questionCount) {
         this.isSuccess = false;
         this.round = round;
         this.createdAt = LocalDateTime.now();
         this.user = user;
         this.keyword = keyword;
         this.liarCharacter = liarCharacter;
+        this.questionCount = questionCount;
     }
 
     public boolean updateSuccess() {

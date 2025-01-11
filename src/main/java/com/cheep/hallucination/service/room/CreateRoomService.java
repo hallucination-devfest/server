@@ -49,18 +49,19 @@ public class CreateRoomService implements CreateRoomUsecase {
                                 .user(user)
                                 .keyword(randKeyword)
                                 .liarCharacter(randCharacter)
+                                .questionCount(3)
                                 .build()
             );
         } else {
             if(room.getIsSuccess()) {
                 newRoom = switch (room.getRound()) {
-                    case 1 -> saveNewRoom(2, user, randCharacter, randKeyword);
-                    case 2 -> saveNewRoom(3, user, randCharacter, randKeyword);
-                    case 3 -> saveNewRoom(1, user, randCharacter, randKeyword);
+                    case 1 -> saveNewRoom(2, user, randCharacter, randKeyword, 2);
+                    case 2 -> saveNewRoom(3, user, randCharacter, randKeyword,1);
+                    case 3 -> saveNewRoom(1, user, randCharacter, randKeyword, 3);
                     default -> newRoom;
                 };
             } else {
-                newRoom = saveNewRoom(1, user, randCharacter, randKeyword);
+                newRoom = saveNewRoom(1, user, randCharacter, randKeyword, 3);
             }
 
         }
@@ -77,17 +78,18 @@ public class CreateRoomService implements CreateRoomUsecase {
                 .characterList(characterListDtos)
                 .round(newRoom.getRound())
                 .category(newRoom.getKeyword().getCategory().getName())
-                .chatCount(2)
+                .chatCount(newRoom.getQuestionCount())
                 .build();
 
     }
 
-    private Room saveNewRoom(Integer round, User user, Character randCharacter, Keyword randKeyword) {
+    private Room saveNewRoom(Integer round, User user, Character randCharacter, Keyword randKeyword, Integer questionCount) {
         return roomRepository.save(Room.builder()
                 .round(round)
                 .user(user)
                 .keyword(randKeyword)
                 .liarCharacter(randCharacter)
+                .questionCount(questionCount)
                 .build());
     }
 }
