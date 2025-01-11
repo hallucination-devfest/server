@@ -35,6 +35,7 @@ public class ChooseKeywordService implements ChooseKeywordUsecase {
                 .orElseThrow(() -> new CommonException(ErrorCode.NOT_FOUND_KEYWORD));
 
         if(keyword.getName().equals(chooseKeywordRequestDto.keyword())) {
+            user.updateChancePlay();
             return ChooseKeywordResponseDto.builder()
                     .isSuccess(true)
                     .build();
