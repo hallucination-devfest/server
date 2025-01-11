@@ -1,5 +1,6 @@
 package com.cheep.hallucination.domain;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,8 +34,11 @@ public class Room {
     @Column(name = "round")
     private Integer round;
 
-    @Column(name = "createdAt")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @Column(name = "question_count")
+    private Integer questionCount;
 
     //-------------------------------
 

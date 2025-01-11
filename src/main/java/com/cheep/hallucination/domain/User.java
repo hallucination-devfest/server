@@ -45,7 +45,7 @@ public class User {
     @Column(name = "role", nullable = false)
     private ERole role;
 
-    @Column(name = "refresh_Token")
+    @Column(name = "refresh_token")
     private String refreshToken;
 
     @Column(name = "email", nullable = false)
