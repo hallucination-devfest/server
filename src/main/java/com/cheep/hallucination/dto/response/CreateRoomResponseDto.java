@@ -5,6 +5,8 @@ import lombok.Builder;
 
 @Builder
 public record CreateRoomResponseDto(
+        Long roomId,
+
         Integer round,
 
         String category,

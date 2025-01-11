@@ -75,6 +75,7 @@ public class CreateRoomService implements CreateRoomUsecase {
                 .toList();
 
         return CreateRoomResponseDto.builder()
+                .roomId(newRoom.getId())
                 .characterList(characterListDtos)
                 .round(newRoom.getRound())
                 .category(newRoom.getKeyword().getCategory().getName())
