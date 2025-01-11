@@ -15,6 +15,8 @@ public enum ErrorCode {
     NOT_FOUND_RESOURCE(40400, HttpStatus.NOT_FOUND, "해당 리소스가 존재하지 않습니다."),
     NOT_FOUND_AUTHORIZATION_HEADER(40400, HttpStatus.NOT_FOUND, "Authorization 헤더가 존재하지 않습니다."),
     NOT_FOUND_USER(40402, HttpStatus.NOT_FOUND, "존재하지 않는 사용자입니다."),
+    NOT_FOUND_ROOM(40403, HttpStatus.NOT_FOUND,"게임방을 찾을 수 없습니다." ),
+
 
     MISSING_REQUEST_PARAMETER(40000, HttpStatus.BAD_REQUEST, "필수 요청 파라미터가 누락되었습니다."),
     INVALID_ARGUMENT(40001, HttpStatus.BAD_REQUEST, "요청에 유효하지 않은 인자입니다."),
@@ -50,10 +52,10 @@ public enum ErrorCode {
     INTERNAL_DATA_ERROR(50001, HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 데이터 에러입니다."),
     UPLOAD_FILE_ERROR(50001, HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패하였습니다."),
 
-    // External Server Error
-    EXTERNAL_SERVER_ERROR(50200, HttpStatus.BAD_GATEWAY, "서버 외부 에러입니다."),
 
-    ;
+    // External Server Error
+    EXTERNAL_SERVER_ERROR(50200, HttpStatus.BAD_GATEWAY, "서버 외부 에러입니다."),;
+
 
     private final Integer code;
     private final HttpStatus httpStatus;

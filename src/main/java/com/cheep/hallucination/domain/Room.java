@@ -67,4 +67,9 @@ public class Room {
         this.keyword = keyword;
         this.liarCharacter = liarCharacter;
     }
+
+    public boolean updateSuccess() {
+        this.isSuccess = true;
+        return true;
+    }
 }
